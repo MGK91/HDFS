@@ -1,0 +1,65 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('.static', filename='dashboard.css')}}">
+{% endblock %}
+
+{% block content %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">HDFS NAme Node Analytics</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+	    <li><a href="{{ url_for('NameNodeHealth') }}">NameNode Health</a></li>
+	    <li><a href="{{ url_for('LoadGenerated') }}">Load Generated </a></li>
+	    <li><a href="{{ url_for('HighUserOperation') }}">Highest User Operation</a></li>
+	    <li><a href="{{ url_for('DirectoryOperation') }}">Directory Operation</a></li>
+	    <li><a href="{{ url_for('UserClassification') }}">User Classification</a></li>
+	    <li><a href="{{ url_for('Latency') }}">Latency Distribution</a></li>
+	    <li><a href="{{ url_for('FileOperations') }}">File Operations</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Welcome, {{ name }}</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <form class="navbar-form navbar-left" action="/predict/test">
+                <input type="text" name="Given_text" class="form-control" placeholder="Enter the value..">
+                <input type="submit" value="Submit">
+              </form>
+			  {{ Predict }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}
